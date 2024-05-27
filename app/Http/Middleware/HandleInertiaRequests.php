@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -35,8 +36,13 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $flashMessage = $request->session()->get('message');
+        Log::info('Flash Message: ' . $flashMessage);
+        
         return array_merge(parent::share($request), [
-            //
+            'flash' => [
+                'message' => $flashMessage
+            ],
         ]);
     }
 }

@@ -3,17 +3,17 @@
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
             <input type="text" v-model="form.name" class="form-control" id="name" aria-describedby="name">
-            <div class="text-danger text-xs" v-if="errors.name">{{ errors.name[0] }}</div>
+            <ErrorMessage :error="errors.name && errors.name[0]" />
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" v-model="form.email" class="form-control" id="email">
-            <div class="text-danger text-xs" v-if="errors.email">{{ errors.email[0] }}</div>
+            <ErrorMessage :error="errors.email && errors.email[0]" />
         </div>
         <div class="mb-3">
             <label for="phone" class="form-label">Phone</label>
             <input type="number" v-model="form.phone" class="form-control" id="phone">
-            <div class="text-danger text-xs" v-if="errors.phone">{{ errors.phone[0] }}</div>
+            <ErrorMessage :error="errors.phone && errors.phone[0]" />
         </div>
         <button type="submit" class="btn btn-primary">{{ submitButtonText }}</button>
         <div v-if="success" class="alert alert-success mt-3">
@@ -25,6 +25,7 @@
 <script setup>
 import { useForm } from "@inertiajs/vue3";
 import { defineProps, defineEmits, toRefs, watch } from 'vue';
+import ErrorMessage from './ErrorMessage.vue'; // Import the ErrorMessage component
 
 const props = defineProps({
     errors: {

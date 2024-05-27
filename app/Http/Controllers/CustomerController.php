@@ -33,7 +33,7 @@ class CustomerController extends Controller
             
             Log::info('Customer created successfully.');
 
-           return Redirect::route('customers.index');
+           return Redirect::route('customers.index')->with('message','Customer created successfully!');;
             
             // return redirect()->route('customers.index');
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -62,7 +62,7 @@ class CustomerController extends Controller
     public function destroy($id){
         $customer = Customer::findOrFail($id);
         $customer->delete();
-        return Redirect::route('customers.index');
+        return Redirect::route('customers.index')->with('message','Customer deleted successfully!');;
     }
 
 
@@ -89,7 +89,7 @@ class CustomerController extends Controller
             
             Log::info('Customer created successfully.');
 
-           return Redirect::route('customers.index');
+           return Redirect::route('customers.index')->with('message','Customer updated successfully!');
             
             // return redirect()->route('customers.index');
         } catch (\Illuminate\Validation\ValidationException $e) {

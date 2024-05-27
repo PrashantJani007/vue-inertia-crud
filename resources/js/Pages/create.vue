@@ -2,6 +2,7 @@
 import { useForm, router } from "@inertiajs/vue3";
 import { defineProps } from 'vue';
 import CustomerForm from './CustomForm.vue';
+import Layout from '../Layouts/Layout.vue';
 
 const props = defineProps({
     errors: {
@@ -26,18 +27,20 @@ function submit(form) {
 </script>
 
 <template>
-    <div class="card col-6 offset-3">
-        <div class="card-header">
-            Create Customer
+    <Layout>
+        <div class="card col-6 offset-3">
+            <div class="card-header">
+                Create Customer
+            </div>
+            <div class="card-body">
+                <CustomerForm
+                    :errors="props.errors"
+                    :success="props.success"
+                    :customer="form"
+                    submitButtonText="Create"
+                    @submit="submit"
+                />
+            </div>
         </div>
-        <div class="card-body">
-            <CustomerForm
-                :errors="props.errors"
-                :success="props.success"
-                :customer="form"
-                submitButtonText="Create"
-                @submit="submit"
-            />
-        </div>
-    </div>
+    </Layout>
 </template>
