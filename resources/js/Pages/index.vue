@@ -10,10 +10,10 @@ function destroy(id) {
     if (confirm('Are you sure you want to delete this customer?')) {
         router.get(`/customers/${id}`);
     }
-}   
+}
 
 function view(id){
-    router.get(`/customers/view/${id}`)
+    router.get(`/customers/views/${id}`)
 }
 
 function edit(id){
@@ -33,7 +33,7 @@ function edit(id){
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="customer in customers" :key="customer.id">
+                setup       <tr v-for="customer in customers" :key="customer.id">
                     <td>{{ customer.name }}</td>
                     <td>{{ customer.email }}</td>
                     <td>{{ customer.phone }}</td>
@@ -46,4 +46,4 @@ function edit(id){
             </tbody>
         </table>
     </div>
-</template>
+</template>edit
