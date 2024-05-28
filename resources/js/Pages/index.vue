@@ -1,31 +1,47 @@
-<script setup>
+<script setup lang="ts">
 import { defineProps } from "vue";
 import { router } from "@inertiajs/vue3";
 import Layout from '../Layouts/Layout.vue';
 
-const props = defineProps({
-    customers: Object
-});
+interface Routes {
+    destroy: string;
+    view: string;
+    edit: string;
+}
 
-function destroy(id) {
+interface Customer {
+    id: number;
+    name: string;
+    email: string;
+    phone: string;
+}
+
+const props = defineProps<{
+    customers: Customer[];
+    routes: Routes;
+}>();
+
+function destroy(id: number) {
     if (confirm('Are you sure you want to delete this customer?')) {
-        router.get(`/customers/${id}`);
+        const url = props.routes.destroy.replace(':id', id.toString());
+        router.get(url);
     }
 }
 
-function view(id) {
-    router.get(`/customers/views/${id}`)
+function view(id: number) {
+    const url = props.routes.view.replace(':id', id.toString());
+    router.get(url);
 }
 
-function edit(id) {
-    router.get(`/customers/${id}/edit`);
+function edit(id: number) {
+    const url = props.routes.edit.replace(':id', id.toString());
+    router.get(url);
 }
 </script>
 
 <template>
     <Layout>
         <br><br>
-        {{ $page.props.flash }}
         <div class="card col-8 offset-2">
             <div v-if="$page.props.flash && $page.props.flash.message" class="alert alert-success">
                 {{ $page.props.flash.message }}

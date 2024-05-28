@@ -55,7 +55,12 @@ class CustomerController extends Controller
                     'phone'=>$customer->phone,
 
                 ];
-            })
+            }),
+            'routes' => [
+                'view' => route('customer.show', ':id'),
+                'edit' => route('customer.edit', ':id'),
+                'destroy' => route('customers.destroy', ':id')
+            ]
         ]);
     }
 

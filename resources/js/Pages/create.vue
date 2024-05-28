@@ -1,27 +1,25 @@
-<script setup>
+<script setup lang="ts">
 import { useForm, router } from "@inertiajs/vue3";
 import { defineProps } from 'vue';
 import CustomerForm from './CustomForm.vue';
 import Layout from '../Layouts/Layout.vue';
 
-const props = defineProps({
-    errors: {
-        type: Object,
-        default: () => ({})
-    },
-    success: {
-        type: String,
-        default: ''
-    }
-});
+interface Errors {
+    [key: string]: string[];
+}
+
+const props = defineProps<{
+    errors: Errors;
+    success: string;
+}>();
 
 const form = useForm({
-    name: null,
-    email: null,
-    phone: null
+    name: null as string | null,
+    email: null as string | null,
+    phone: null as string | null
 });
 
-function submit(form) {
+function submit(form: typeof form) {
     form.post('/customers');
 }
 </script>
